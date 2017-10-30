@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.backstage.zeus.base.mapper.ZcdcZxMapper">
+  <resultMap id="BaseResultMap" type="ZcdcZx">
+    <id column="zx_uuid" jdbcType="VARCHAR" property="zxUuid" />
+    <result column="zx_code" jdbcType="VARCHAR" property="zxCode" />
+    <result column="zx_name" jdbcType="VARCHAR" property="zxName" />
+    <result column="zx_range" jdbcType="VARCHAR" property="zxRange" />
+    <result column="zx_status" jdbcType="VARCHAR" property="zxStatus" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="zx_type" jdbcType="VARCHAR" property="zxType" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="key1" jdbcType="VARCHAR" property="key1" />
+    <result column="key2" jdbcType="VARCHAR" property="key2" />
+    <result column="key3" jdbcType="VARCHAR" property="key3" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    zx_uuid, zx_code, zx_name, zx_range, zx_status, start_time, end_time, zx_type, create_time, 
+    update_time, key1, key2, key3
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from zcdc_zx
+    where zx_uuid = #{zxUuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from zcdc_zx
+    where zx_uuid = #{zxUuid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByPrimaryKeyList" parameterType="list">
+    delete from zcdc_zx
+    where zx_uuid in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
+  <insert id="insert" parameterType="ZcdcZx">
+    insert into zcdc_zx (zx_uuid, zx_code, zx_name, 
+      zx_range, zx_status, start_time, 
+      end_time, zx_type, create_time, 
+      update_time, key1, key2, 
+      key3)
+    values (#{zxUuid,jdbcType=VARCHAR}, #{zxCode,jdbcType=VARCHAR}, #{zxName,jdbcType=VARCHAR}, 
+      #{zxRange,jdbcType=VARCHAR}, #{zxStatus,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{zxType,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{key1,jdbcType=VARCHAR}, #{key2,jdbcType=VARCHAR}, 
+      #{key3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="ZcdcZx">
+    insert into zcdc_zx
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="zxUuid != null">
+        zx_uuid,
+      </if>
+      <if test="zxCode != null">
+        zx_code,
+      </if>
+      <if test="zxName != null">
+        zx_name,
+      </if>
+      <if test="zxRange != null">
+        zx_range,
+      </if>
+      <if test="zxStatus != null">
+        zx_status,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="zxType != null">
+        zx_type,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="key1 != null">
+        key1,
+      </if>
+      <if test="key2 != null">
+        key2,
+      </if>
+      <if test="key3 != null">
+        key3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="zxUuid != null">
+        #{zxUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="zxCode != null">
+        #{zxCode,jdbcType=VARCHAR},
+      </if>
+      <if test="zxName != null">
+        #{zxName,jdbcType=VARCHAR},
+      </if>
+      <if test="zxRange != null">
+        #{zxRange,jdbcType=VARCHAR},
+      </if>
+      <if test="zxStatus != null">
+        #{zxStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zxType != null">
+        #{zxType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="key1 != null">
+        #{key1,jdbcType=VARCHAR},
+      </if>
+      <if test="key2 != null">
+        #{key2,jdbcType=VARCHAR},
+      </if>
+      <if test="key3 != null">
+        #{key3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="ZcdcZx">
+    update zcdc_zx
+    <set>
+      <if test="zxCode != null">
+        zx_code = #{zxCode,jdbcType=VARCHAR},
+      </if>
+      <if test="zxName != null">
+        zx_name = #{zxName,jdbcType=VARCHAR},
+      </if>
+      <if test="zxRange != null">
+        zx_range = #{zxRange,jdbcType=VARCHAR},
+      </if>
+      <if test="zxStatus != null">
+        zx_status = #{zxStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zxType != null">
+        zx_type = #{zxType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="key1 != null">
+        key1 = #{key1,jdbcType=VARCHAR},
+      </if>
+      <if test="key2 != null">
+        key2 = #{key2,jdbcType=VARCHAR},
+      </if>
+      <if test="key3 != null">
+        key3 = #{key3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where zx_uuid = #{zxUuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ZcdcZx">
+    update zcdc_zx
+    set zx_code = #{zxCode,jdbcType=VARCHAR},
+      zx_name = #{zxName,jdbcType=VARCHAR},
+      zx_range = #{zxRange,jdbcType=VARCHAR},
+      zx_status = #{zxStatus,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      zx_type = #{zxType,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      key1 = #{key1,jdbcType=VARCHAR},
+      key2 = #{key2,jdbcType=VARCHAR},
+      key3 = #{key3,jdbcType=VARCHAR}
+    where zx_uuid = #{zxUuid,jdbcType=VARCHAR}
+  </update>
+
+  <!-- 列表查询  -->
+  <select id="findPageDo" resultMap="BaseResultMap" parameterType="pagedo">
+    select
+    <include refid="Base_Column_List" />
+    from zcdc_zx
+    order by create_time desc
+    limit #{limit} offset #{offset}
+  </select>
+
+  <!-- 列表查询总条数  -->
+  <select id="findPageDoCount" resultType="java.lang.Integer" parameterType="PageDo">
+    select count(*) count
+    from zcdc_zx
+  </select>
+  <select id="queryMaxZxCode" resultType="String">
+    select max(zx_code)
+    from zcdc_zx
+  </select>
+
+  <update id="updateStatusu2Stop" parameterType="list">
+    update zcdc_zx
+    set zx_status = '2',end_time = now()
+    where zx_uuid in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </update>
+
+</mapper>
