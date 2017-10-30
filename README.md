@@ -1,8 +1,10 @@
 # zeus-parent
-后端服务器侧（前后端分离，利用ajax交互）
-
+* 概述：
+    * 后端服务器侧（前后端分离，利用ajax交互）
+    * 前台为zeus-ui，参见 https://github.com/jiangcaijun/zeus-ui
 #### 1、技术架构
 后端以springboot、maven多模块为基础框架，数据库为mysql，实现简单的CRUD功能。前后端以RESTFUL风格的ajax请求来进行交互。
+
   
 #### 2、项目分层
 
