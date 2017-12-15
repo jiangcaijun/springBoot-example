@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.backstage.zeus.base.mapper.WeblogMapper">
+  <resultMap id="BaseResultMap" type="com.backstage.zeus.base.models.Weblog">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="ip1" jdbcType="VARCHAR" property="ip1" />
+    <result column="ip2" jdbcType="VARCHAR" property="ip2" />
+    <result column="url1" jdbcType="VARCHAR" property="url1" />
+    <result column="url2" jdbcType="VARCHAR" property="url2" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
+    <result column="fileName" jdbcType="VARCHAR" property="filename" />
+    <result column="taskId" jdbcType="VARCHAR" property="taskid" />
+    <result column="time" jdbcType="VARCHAR" property="time" />
+    <result column="file_edit_time" jdbcType="VARCHAR" property="fileEditTime" />
+    <result column="logType" jdbcType="VARCHAR" property="logtype" />
+    <result column="log_file_path" jdbcType="VARCHAR" property="logFilePath" />
+    <result column="assetId" jdbcType="VARCHAR" property="assetid" />
+    <result column="assetLabel" jdbcType="VARCHAR" property="assetlabel" />
+    <result column="assetType" jdbcType="VARCHAR" property="assettype" />
+    <result column="label" jdbcType="VARCHAR" property="label" />
+    <result column="traffic" jdbcType="VARCHAR" property="traffic" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="url1_resources1" jdbcType="VARCHAR" property="url1Resources1" />
+    <result column="url1_resources2" jdbcType="VARCHAR" property="url1Resources2" />
+    <result column="url2_resources1" jdbcType="VARCHAR" property="url2Resources1" />
+    <result column="url2_resources2" jdbcType="VARCHAR" property="url2Resources2" />
+    <result column="url1_resources1_suffix" jdbcType="VARCHAR" property="url1Resources1Suffix" />
+    <result column="url1_resources2_suffix" jdbcType="VARCHAR" property="url1Resources2Suffix" />
+    <result column="url2_resources1_suffix" jdbcType="VARCHAR" property="url2Resources1Suffix" />
+    <result column="url2_resources2_suffix" jdbcType="VARCHAR" property="url2Resources2Suffix" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.backstage.zeus.base.models.Weblog">
+    <result column="original_text" jdbcType="LONGVARCHAR" property="originalText" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, ip, ip1, ip2, url1, url2, method, fileName, taskId, time, file_edit_time, logType, 
+    log_file_path, assetId, assetLabel, assetType, label, traffic, status, url1_resources1, 
+    url1_resources2, url2_resources1, url2_resources2, url1_resources1_suffix, url1_resources2_suffix, 
+    url2_resources1_suffix, url2_resources2_suffix
+  </sql>
+  <sql id="Blob_Column_List">
+    original_text
+  </sql>
+  <select id="queryCount" resultType="java.lang.Integer">
+    select count(*) from t_weblog_001
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_weblog_001
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_weblog_001
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.backstage.zeus.base.models.Weblog">
+    insert into t_weblog_001 (id, ip, ip1, ip2, 
+      url1, url2, method, 
+      fileName, taskId, time, 
+      file_edit_time, logType, log_file_path, 
+      assetId, assetLabel, assetType, 
+      label, traffic, status, 
+      url1_resources1, url1_resources2, url2_resources1, 
+      url2_resources2, url1_resources1_suffix, url1_resources2_suffix, 
+      url2_resources1_suffix, url2_resources2_suffix, 
+      original_text)
+    values (#{id,jdbcType=BIGINT}, #{ip,jdbcType=VARCHAR}, #{ip1,jdbcType=VARCHAR}, #{ip2,jdbcType=VARCHAR}, 
+      #{url1,jdbcType=VARCHAR}, #{url2,jdbcType=VARCHAR}, #{method,jdbcType=VARCHAR}, 
+      #{filename,jdbcType=VARCHAR}, #{taskid,jdbcType=VARCHAR}, #{time,jdbcType=VARCHAR}, 
+      #{fileEditTime,jdbcType=VARCHAR}, #{logtype,jdbcType=VARCHAR}, #{logFilePath,jdbcType=VARCHAR}, 
+      #{assetid,jdbcType=VARCHAR}, #{assetlabel,jdbcType=VARCHAR}, #{assettype,jdbcType=VARCHAR}, 
+      #{label,jdbcType=VARCHAR}, #{traffic,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{url1Resources1,jdbcType=VARCHAR}, #{url1Resources2,jdbcType=VARCHAR}, #{url2Resources1,jdbcType=VARCHAR}, 
+      #{url2Resources2,jdbcType=VARCHAR}, #{url1Resources1Suffix,jdbcType=VARCHAR}, #{url1Resources2Suffix,jdbcType=VARCHAR}, 
+      #{url2Resources1Suffix,jdbcType=VARCHAR}, #{url2Resources2Suffix,jdbcType=VARCHAR}, 
+      #{originalText,jdbcType=LONGVARCHAR})
+  </insert>
+
+  <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">
+    <selectKey resultType="long" keyProperty="id" order="AFTER">
+      SELECT
+      LAST_INSERT_ID()
+    </selectKey>
+    insert into t_weblog_001 (id, ip, ip1, ip2,
+      url1, url2, method,
+      fileName, taskId, time,
+      file_edit_time, logType, log_file_path,
+      assetId, assetLabel, assetType,
+      label, traffic, status,
+      url1_resources1, url1_resources2, url2_resources1,
+      url2_resources2, url1_resources1_suffix, url1_resources2_suffix,
+      url2_resources1_suffix, url2_resources2_suffix,
+      original_text)
+    values
+    <foreach collection="weblogList" item="item" index="index" separator="," >
+      (#{item.id,jdbcType=BIGINT}, #{item.ip,jdbcType=VARCHAR}, #{item.ip1,jdbcType=VARCHAR}, #{item.ip2,jdbcType=VARCHAR},
+      #{item.url1,jdbcType=VARCHAR}, #{item.url2,jdbcType=VARCHAR}, #{item.method,jdbcType=VARCHAR},
+      #{item.filename,jdbcType=VARCHAR}, #{item.taskid,jdbcType=VARCHAR}, #{item.time,jdbcType=VARCHAR},
+      #{item.fileEditTime,jdbcType=VARCHAR}, #{item.logtype,jdbcType=VARCHAR}, #{item.logFilePath,jdbcType=VARCHAR},
+      #{item.assetid,jdbcType=VARCHAR}, #{item.assetlabel,jdbcType=VARCHAR}, #{item.assettype,jdbcType=VARCHAR},
+      #{item.label,jdbcType=VARCHAR}, #{item.traffic,jdbcType=VARCHAR}, #{item.status,jdbcType=VARCHAR},
+      #{item.url1Resources1,jdbcType=VARCHAR}, #{item.url1Resources2,jdbcType=VARCHAR}, #{item.url2Resources1,jdbcType=VARCHAR},
+      #{item.url2Resources2,jdbcType=VARCHAR}, #{item.url1Resources1Suffix,jdbcType=VARCHAR}, #{item.url1Resources2Suffix,jdbcType=VARCHAR},
+      #{item.url2Resources1Suffix,jdbcType=VARCHAR}, #{item.url2Resources2Suffix,jdbcType=VARCHAR},
+      #{item.originalText,jdbcType=LONGVARCHAR})
+    </foreach>
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.backstage.zeus.base.models.Weblog">
+    insert into t_weblog_001
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="ip1 != null">
+        ip1,
+      </if>
+      <if test="ip2 != null">
+        ip2,
+      </if>
+      <if test="url1 != null">
+        url1,
+      </if>
+      <if test="url2 != null">
+        url2,
+      </if>
+      <if test="method != null">
+        method,
+      </if>
+      <if test="filename != null">
+        fileName,
+      </if>
+      <if test="taskid != null">
+        taskId,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="fileEditTime != null">
+        file_edit_time,
+      </if>
+      <if test="logtype != null">
+        logType,
+      </if>
+      <if test="logFilePath != null">
+        log_file_path,
+      </if>
+      <if test="assetid != null">
+        assetId,
+      </if>
+      <if test="assetlabel != null">
+        assetLabel,
+      </if>
+      <if test="assettype != null">
+        assetType,
+      </if>
+      <if test="label != null">
+        label,
+      </if>
+      <if test="traffic != null">
+        traffic,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="url1Resources1 != null">
+        url1_resources1,
+      </if>
+      <if test="url1Resources2 != null">
+        url1_resources2,
+      </if>
+      <if test="url2Resources1 != null">
+        url2_resources1,
+      </if>
+      <if test="url2Resources2 != null">
+        url2_resources2,
+      </if>
+      <if test="url1Resources1Suffix != null">
+        url1_resources1_suffix,
+      </if>
+      <if test="url1Resources2Suffix != null">
+        url1_resources2_suffix,
+      </if>
+      <if test="url2Resources1Suffix != null">
+        url2_resources1_suffix,
+      </if>
+      <if test="url2Resources2Suffix != null">
+        url2_resources2_suffix,
+      </if>
+      <if test="originalText != null">
+        original_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="ip1 != null">
+        #{ip1,jdbcType=VARCHAR},
+      </if>
+      <if test="ip2 != null">
+        #{ip2,jdbcType=VARCHAR},
+      </if>
+      <if test="url1 != null">
+        #{url1,jdbcType=VARCHAR},
+      </if>
+      <if test="url2 != null">
+        #{url2,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null">
+        #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="taskid != null">
+        #{taskid,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="fileEditTime != null">
+        #{fileEditTime,jdbcType=VARCHAR},
+      </if>
+      <if test="logtype != null">
+        #{logtype,jdbcType=VARCHAR},
+      </if>
+      <if test="logFilePath != null">
+        #{logFilePath,jdbcType=VARCHAR},
+      </if>
+      <if test="assetid != null">
+        #{assetid,jdbcType=VARCHAR},
+      </if>
+      <if test="assetlabel != null">
+        #{assetlabel,jdbcType=VARCHAR},
+      </if>
+      <if test="assettype != null">
+        #{assettype,jdbcType=VARCHAR},
+      </if>
+      <if test="label != null">
+        #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="traffic != null">
+        #{traffic,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="url1Resources1 != null">
+        #{url1Resources1,jdbcType=VARCHAR},
+      </if>
+      <if test="url1Resources2 != null">
+        #{url1Resources2,jdbcType=VARCHAR},
+      </if>
+      <if test="url2Resources1 != null">
+        #{url2Resources1,jdbcType=VARCHAR},
+      </if>
+      <if test="url2Resources2 != null">
+        #{url2Resources2,jdbcType=VARCHAR},
+      </if>
+      <if test="url1Resources1Suffix != null">
+        #{url1Resources1Suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="url1Resources2Suffix != null">
+        #{url1Resources2Suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="url2Resources1Suffix != null">
+        #{url2Resources1Suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="url2Resources2Suffix != null">
+        #{url2Resources2Suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="originalText != null">
+        #{originalText,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.backstage.zeus.base.models.Weblog">
+    update t_weblog_001
+    <set>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="ip1 != null">
+        ip1 = #{ip1,jdbcType=VARCHAR},
+      </if>
+      <if test="ip2 != null">
+        ip2 = #{ip2,jdbcType=VARCHAR},
+      </if>
+      <if test="url1 != null">
+        url1 = #{url1,jdbcType=VARCHAR},
+      </if>
+      <if test="url2 != null">
+        url2 = #{url2,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        method = #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null">
+        fileName = #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="taskid != null">
+        taskId = #{taskid,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="fileEditTime != null">
+        file_edit_time = #{fileEditTime,jdbcType=VARCHAR},
+      </if>
+      <if test="logtype != null">
+        logType = #{logtype,jdbcType=VARCHAR},
+      </if>
+      <if test="logFilePath != null">
+        log_file_path = #{logFilePath,jdbcType=VARCHAR},
+      </if>
+      <if test="assetid != null">
+        assetId = #{assetid,jdbcType=VARCHAR},
+      </if>
+      <if test="assetlabel != null">
+        assetLabel = #{assetlabel,jdbcType=VARCHAR},
+      </if>
+      <if test="assettype != null">
+        assetType = #{assettype,jdbcType=VARCHAR},
+      </if>
+      <if test="label != null">
+        label = #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="traffic != null">
+        traffic = #{traffic,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="url1Resources1 != null">
+        url1_resources1 = #{url1Resources1,jdbcType=VARCHAR},
+      </if>
+      <if test="url1Resources2 != null">
+        url1_resources2 = #{url1Resources2,jdbcType=VARCHAR},
+      </if>
+      <if test="url2Resources1 != null">
+        url2_resources1 = #{url2Resources1,jdbcType=VARCHAR},
+      </if>
+      <if test="url2Resources2 != null">
+        url2_resources2 = #{url2Resources2,jdbcType=VARCHAR},
+      </if>
+      <if test="url1Resources1Suffix != null">
+        url1_resources1_suffix = #{url1Resources1Suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="url1Resources2Suffix != null">
+        url1_resources2_suffix = #{url1Resources2Suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="url2Resources1Suffix != null">
+        url2_resources1_suffix = #{url2Resources1Suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="url2Resources2Suffix != null">
+        url2_resources2_suffix = #{url2Resources2Suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="originalText != null">
+        original_text = #{originalText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.backstage.zeus.base.models.Weblog">
+    update t_weblog_001
+    set ip = #{ip,jdbcType=VARCHAR},
+      ip1 = #{ip1,jdbcType=VARCHAR},
+      ip2 = #{ip2,jdbcType=VARCHAR},
+      url1 = #{url1,jdbcType=VARCHAR},
+      url2 = #{url2,jdbcType=VARCHAR},
+      method = #{method,jdbcType=VARCHAR},
+      fileName = #{filename,jdbcType=VARCHAR},
+      taskId = #{taskid,jdbcType=VARCHAR},
+      time = #{time,jdbcType=VARCHAR},
+      file_edit_time = #{fileEditTime,jdbcType=VARCHAR},
+      logType = #{logtype,jdbcType=VARCHAR},
+      log_file_path = #{logFilePath,jdbcType=VARCHAR},
+      assetId = #{assetid,jdbcType=VARCHAR},
+      assetLabel = #{assetlabel,jdbcType=VARCHAR},
+      assetType = #{assettype,jdbcType=VARCHAR},
+      label = #{label,jdbcType=VARCHAR},
+      traffic = #{traffic,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      url1_resources1 = #{url1Resources1,jdbcType=VARCHAR},
+      url1_resources2 = #{url1Resources2,jdbcType=VARCHAR},
+      url2_resources1 = #{url2Resources1,jdbcType=VARCHAR},
+      url2_resources2 = #{url2Resources2,jdbcType=VARCHAR},
+      url1_resources1_suffix = #{url1Resources1Suffix,jdbcType=VARCHAR},
+      url1_resources2_suffix = #{url1Resources2Suffix,jdbcType=VARCHAR},
+      url2_resources1_suffix = #{url2Resources1Suffix,jdbcType=VARCHAR},
+      url2_resources2_suffix = #{url2Resources2Suffix,jdbcType=VARCHAR},
+      original_text = #{originalText,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.backstage.zeus.base.models.Weblog">
+    update t_weblog_001
+    set ip = #{ip,jdbcType=VARCHAR},
+      ip1 = #{ip1,jdbcType=VARCHAR},
+      ip2 = #{ip2,jdbcType=VARCHAR},
+      url1 = #{url1,jdbcType=VARCHAR},
+      url2 = #{url2,jdbcType=VARCHAR},
+      method = #{method,jdbcType=VARCHAR},
+      fileName = #{filename,jdbcType=VARCHAR},
+      taskId = #{taskid,jdbcType=VARCHAR},
+      time = #{time,jdbcType=VARCHAR},
+      file_edit_time = #{fileEditTime,jdbcType=VARCHAR},
+      logType = #{logtype,jdbcType=VARCHAR},
+      log_file_path = #{logFilePath,jdbcType=VARCHAR},
+      assetId = #{assetid,jdbcType=VARCHAR},
+      assetLabel = #{assetlabel,jdbcType=VARCHAR},
+      assetType = #{assettype,jdbcType=VARCHAR},
+      label = #{label,jdbcType=VARCHAR},
+      traffic = #{traffic,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      url1_resources1 = #{url1Resources1,jdbcType=VARCHAR},
+      url1_resources2 = #{url1Resources2,jdbcType=VARCHAR},
+      url2_resources1 = #{url2Resources1,jdbcType=VARCHAR},
+      url2_resources2 = #{url2Resources2,jdbcType=VARCHAR},
+      url1_resources1_suffix = #{url1Resources1Suffix,jdbcType=VARCHAR},
+      url1_resources2_suffix = #{url1Resources2Suffix,jdbcType=VARCHAR},
+      url2_resources1_suffix = #{url2Resources1Suffix,jdbcType=VARCHAR},
+      url2_resources2_suffix = #{url2Resources2Suffix,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

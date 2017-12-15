@@ -4,17 +4,17 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.backstage</groupId>
-	<artifactId>zeus-parent</artifactId>
+	<artifactId>springBoot-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>zeus</name>
-	<description>ZEUS</description>
+	<name>springBoot</name>
+	<description>springBoot demo + maven</description>
 
 	<modules>
-        <module>zeus-util</module>
-        <module>zeus-base</module>
-        <module>zeus-api</module>
+        <module>springBoot-util</module>
+        <module>springBoot-base</module>
+        <module>springBoot-api</module>
     </modules>
 
 	<properties>
