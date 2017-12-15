@@ -1,17 +1,17 @@
-# zeus-parent
+# springBoot-example
 * 概述：
     * 后端服务器侧（前后端分离，利用ajax交互）
     * 前台为zeus-ui，参见 https://github.com/jiangcaijun/zeus-ui
 #### 1、技术架构
-后端以springboot、maven多模块为基础框架，数据库为mysql+redis，实现简单的CRUD功能。前后端以RESTFUL风格的ajax请求来进行交互。
+后端以springboot、maven多模块为基础框架，数据库为 mysql + redis ，实现简单的 CRUD 功能。前后端以RESTFUL风格的ajax请求来进行交互。
   
 #### 2、项目分层
 
-* zeus-api 控制层，主要是各类controller
+* springBoot-api 控制层，主要是各类controller
     * 实现对mysql常见的CRUD请求(PUT、DELETE、PATCH、POST、GET等)，以自定义的Response来返回至客户端（主要体现在 RedisExampleController.java类中）
     * 实现SpringBoot下redis的set与get（主要体现在 RedisExampleController.java类中）
-* zeus-base 接口层,包含service接口和entiy实体类  
-* zeus-util 工具类层
+* springBoot-base 接口层,包含service接口和entiy实体类  
+* springBoot-util 工具类层
 
 * 项目代码总体结构如下：
 
@@ -52,7 +52,7 @@ public class RedisExampleController {
 }
 ```
 
-* 配置如下（路径在 zeus-api\src\main\resources\application-dev.properties）：
+* 配置如下（路径在 springBoot-api\src\main\resources\application-dev.properties）：
 ```
 #REDIS
 # Redis数据库索引（默认为0）
@@ -74,7 +74,7 @@ spring.redis.pool.min-idle=0
 # 连接超时时间（毫秒）
 spring.redis.timeout=0
 ```
-* redis赋值测试：
+* redis赋值测试(项目名这里定义成 zeus ，下同)：
 http://localhost:7500/zeus/redis/set?value=vic
     
 ![redis赋值测试](https://github.com/jiangcaijun/pictureAsset/blob/HEAD/src/zeus-parent/2017-10-30_172216.png?raw=true)
