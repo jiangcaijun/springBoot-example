@@ -15,7 +15,7 @@
 
 * 项目代码总体结构如下：
 
-![项目代码总体结构](https://github.com/jiangcaijun/pictureAsset/blob/HEAD/src/zeus-parent/2017-10-30_172632.png?raw=true)
+![项目代码总体结构](https://github.com/jiangcaijun/pictureAsset/blob/HEAD/src/zeus-parent/2017-10-30_172633.png?raw=true)
     
 
 #### 3、项目启动
