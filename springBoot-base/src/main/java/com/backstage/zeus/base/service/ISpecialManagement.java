@@ -2,9 +2,11 @@ package com.backstage.zeus.base.service;
 
 import com.backstage.zeus.base.models.ZcdcZx;
 import com.backstage.zeus.base.models.PageDo;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Transactional
 public interface ISpecialManagement {
 
 	/**
@@ -40,4 +42,9 @@ public interface ISpecialManagement {
 	 * @return
 	 */
 	int stopZX(List<String> idList);
+
+	/**
+	 * 测试事物
+	 */
+	void testTransactionManagement();
 }

@@ -8,6 +8,7 @@ import com.backstage.zeus.base.service.ISpecialManagement;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
 public class SpecialManagementService implements ISpecialManagement {
 
 	private final Logger LOG = Logger.getLogger(this.getClass());
+
 	@Resource
 	private ZcdcZxMapper zcdcZxMapper;
 
@@ -68,5 +70,17 @@ public class SpecialManagementService implements ISpecialManagement {
 	@Override
 	public int stopZX(List<String> idList) {
 		return zcdcZxMapper.updateStatusu2Stop(idList);
+	}
+
+	@Override
+	public void testTransactionManagement() {
+		ZcdcZx zcdcZx = new ZcdcZx();
+		zcdcZx.setZxUuid("A");
+		insert(zcdcZx);
+		if(true){
+			throw new RuntimeException();
+		}
+		zcdcZx.setZxUuid("B");
+		insert(zcdcZx);
 	}
 }
