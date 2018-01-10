@@ -138,6 +138,18 @@
 			<artifactId>lombok</artifactId>
 			<version>RELEASE</version>
 		</dependency>
+
+		<!--使用swagger start-->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+		</dependency>
+		<!--使用swagger end-->
+
 	</dependencies>
 
 	<build>
