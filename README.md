@@ -70,7 +70,7 @@ public class RedisExampleController {
 
 * redis赋值测试(项目名这里定义成 zeus ，下同)：
 http://localhost:7500/zeus/redis/set?value=vic
-> 说明，说不需要项目路径，可将：`server.servlet.context-path`属性删除
+> 说明：若不需要项目路径，可将：`server.servlet.context-path`属性删除
 
 ![redis赋值测试](https://github.com/jiangcaijun/pictureAsset/blob/HEAD/src/zeus-parent/2017-10-30_172216.png?raw=true)
 
