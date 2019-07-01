@@ -3,7 +3,7 @@
     * 后端服务器侧（前后端分离，利用ajax交互）
     * 前台为**springBoot-example-ui**，参见 https://github.com/jiangcaijun/springBoot-example-ui
 #### 1、技术架构
-后端以springboot、maven多模块为基础框架，数据库为 mysql + redis ，实现简单的 CRUD 功能。前后端以RESTFUL风格的ajax请求来进行交互。
+后端以springboot（版本2.1.4）、maven多模块为基础框架，数据库为 mysql + redis ，实现简单的 CRUD 功能。前后端以RESTFUL风格的ajax请求来进行交互。
   
 #### 2、项目分层
 
@@ -70,7 +70,8 @@ public class RedisExampleController {
 
 * redis赋值测试(项目名这里定义成 zeus ，下同)：
 http://localhost:7500/zeus/redis/set?value=vic
-    
+> 说明，说不需要项目路径，可将：`server.servlet.context-path`属性删除
+
 ![redis赋值测试](https://github.com/jiangcaijun/pictureAsset/blob/HEAD/src/zeus-parent/2017-10-30_172216.png?raw=true)
 
 * redis取值测试：
@@ -81,7 +82,8 @@ http://localhost:7500/zeus/redis/get
 #### 5、springboot + swagger2 相关
 
 1、添加依赖信息
-    ```
+
+```
     <!--使用swagger start-->
     <dependency>
         <groupId>io.springfox</groupId>
@@ -94,7 +96,8 @@ http://localhost:7500/zeus/redis/get
         <version>2.7.0</version>
     </dependency>
     <!--使用swagger end-->
-    ```
+```
+    
 2、添加swagger配置
 * SwaggerConfig.java
     ```
