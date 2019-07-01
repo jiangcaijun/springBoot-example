@@ -17,7 +17,7 @@
     <result column="key3" jdbcType="VARCHAR" property="key3" />
   </resultMap>
   <sql id="Base_Column_List">
-    zx_uuid, zx_code, zx_name, zx_range, zx_status, start_time, end_time, zx_type, create_time, 
+    zx_uuid, zx_code, zx_name, zx_range, zx_status, start_time, end_time, zx_type, create_time,
     update_time, key1, key2, key3
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -176,22 +176,8 @@
     </set>
     where zx_uuid = #{zxUuid,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="ZcdcZx">
-    update zcdc_zx
-    set zx_code = #{zxCode,jdbcType=VARCHAR},
-      zx_name = #{zxName,jdbcType=VARCHAR},
-      zx_range = #{zxRange,jdbcType=VARCHAR},
-      zx_status = #{zxStatus,jdbcType=VARCHAR},
-      start_time = #{startTime,jdbcType=TIMESTAMP},
-      end_time = #{endTime,jdbcType=TIMESTAMP},
-      zx_type = #{zxType,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      key1 = #{key1,jdbcType=VARCHAR},
-      key2 = #{key2,jdbcType=VARCHAR},
-      key3 = #{key3,jdbcType=VARCHAR}
-    where zx_uuid = #{zxUuid,jdbcType=VARCHAR}
-  </update>
+
+
 
   <!-- 列表查询  -->
   <select id="findPageDo" resultMap="BaseResultMap" parameterType="pagedo">

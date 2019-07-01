@@ -2,7 +2,6 @@ package com.backstage.util;
 
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,7 +13,6 @@ import java.util.*;
  */
 public class DateUtil {
 
-	private static final Logger LOG = Logger.getLogger(DateUtil.class);
 	private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 	private static Calendar c = Calendar.getInstance();
@@ -222,29 +220,6 @@ public class DateUtil {
 		return format.format(new Date(str));
 	}
 
-	/**
-	 * 首页-时间参数
-	 * @param params
-	 */
-	public static void getParam(Map<String, String> params){
-		String time = params.get("time");//获取时间
-		Map<String,Object> timeMap  = (Map<String,Object>) JSONObject.parse(time);
-		String startTime = String.valueOf(timeMap.get("start"));
-		String endTime = String.valueOf(timeMap.get("end"));
-		try {
-			startTime = DateUtil.longToDare(Long.parseLong(startTime));
-			endTime = DateUtil.longToDare(Long.parseLong(endTime));
-			//若转换之后得到的日期为1970年，默认重新生成一个月的时间查询，这里是前台时间传的不准确造成的
-			if(StringUtils.isNotEmpty(startTime) &&startTime.contains("1970")){
-				startTime = DateUtil.getAgoOneMonth(new Date());
-				endTime = DateUtil.getTimeByFormat(new Date(),"yyyy-MM-dd");
-			}
-			params.put("startTime",startTime+" 00:00:00");
-			params.put("endTime",endTime+" 23:59:59");
-		}catch (Exception e){
-			LOG.error("首页-时间参数处理出现异常",e);
-		}
-	}
 
 	/**
 	 * 根据时间及

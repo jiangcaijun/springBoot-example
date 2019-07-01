@@ -10,6 +10,9 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * swagger 配置类
+ */
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
@@ -18,7 +21,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.backstage.api.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.backstage"))
                 .paths(PathSelectors.any())
                 .build();
     }
